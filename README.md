@@ -18,7 +18,6 @@ Also run "pip install -r requirements.txt" in order to install the prerequisites
 
 | Locale (BCP-47) | Language |
 |-----------------|----------|
-
 | af-ZA|Afrikaans (South Africa)|
 | am-ET|Amharic (Ethiopia)|
 | ar-AE|Arabic (United Arab Emirates)|
