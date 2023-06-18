@@ -1,0 +1,1 @@
+Rename config-template.ini to config.ini and write the necessary keys
