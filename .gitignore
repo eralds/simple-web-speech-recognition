@@ -1,1 +1,3 @@
 config/config.ini
+config/cert.pem
+config/key.pem
