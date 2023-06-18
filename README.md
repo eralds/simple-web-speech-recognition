@@ -19,7 +19,9 @@ This project is licensed under the MIT License.
 
 ## Acknowledgements
 The [Flask web framework](https://flask.palletsprojects.com/en/2.3.x/)
+
 The [Azure SDK](https://azure.microsoft.com/en-us/products/cognitive-services/speech-services/)
+
 This [GMass blog page](https://www.gmass.co/blog/record-audio-mobile-web-page-ios-android/) written by Ajay Goel.
 
 Feel free to contribute to this project by opening issues or submitting pull requests. Enjoy using the web speech recognizer!
