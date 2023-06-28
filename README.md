@@ -1,6 +1,6 @@
 # Simple Web Speech Recognizer
 
-This is a simple web-based speech recognizer built with Python and Flask. It allows users to record and transcribe their speech using a web browser. The audio data is then send to the server in order to be transcribed. It is build upon the Azure Speech API.
+This is a simple web-based speech recognizer built with Python and Flask. It allows users to record and transcribe their speech using a web browser. The audio data is then sent to the server in order to be transcribed. It is build upon the Azure Speech API.
 
 ## Features
 
