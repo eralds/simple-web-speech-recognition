@@ -2,6 +2,11 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import azure.cognitiveservices.speech as speechsdk
 import configparser
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+import os
+
+MAX_FILE_SIZE = 1 * 1024 * 1024  # 1 MB
 
 # Create a configuration parser instance
 config = configparser.ConfigParser()
@@ -14,16 +19,24 @@ api_region = config.get('azure', 'API_REGION')
 api_language = config.get('azure', 'API_LANGUAGE')
 
 app = Flask(__name__, static_folder='public_html')
+limiter = Limiter(app=app, key_func=get_remote_address, default_limits=["100 per day", "40 per hour"],)
 
-@app.route('/static/<path:filename>')
-def serve_files(filename):
-    return send_from_directory('public_html/static', filename)
+
 
 app.config['UPLOAD_EXTENSIONS'] = ['.wav']
+app.config["LIMITER_HEADERS_ENABLED"] = True
 
 CORS(app)
 
+
+@app.route('/static/<path:filename>')
+@limiter.exempt
+def serve_files(filename):
+    return send_from_directory('public_html/static', filename)
+
+
 @app.route('/')
+@limiter.exempt
 def hello():
     return app.send_static_file('index.html')
 
@@ -32,6 +45,11 @@ def handle_recognize():
     
     # Get the audio filestorage object 
     input_file = request.files['audio']
+    file_size = int(request.headers.get('Content-Length', 0))
+    if file_size > MAX_FILE_SIZE:
+        error_msg = f"File size exceeds the maximum limit of 1MB."
+        return jsonify({'error': error_msg}), 413  # Return HTTP 413 Payload Too Large error
+    
     input_data = input_file.read()
     input = recognize_from_input(input_data)
     

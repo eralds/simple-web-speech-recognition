@@ -75,8 +75,8 @@ function WzRecorder(config) {
 			if (request.readyState == 4)
 			{
 				status = request.status == 200 ? 'done' : 'error';
-                var data = JSON.parse(e.target.responseText)
-                text.innerHTML = data.text;
+                		var data = JSON.parse(e.target.responseText)
+                		text.innerHTML = data.text;
 			}
 		};
   
